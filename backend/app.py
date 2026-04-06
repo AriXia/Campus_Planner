@@ -36,7 +36,7 @@ def add_course():
     next_id += 1
     return jsonify(new_course), 201
 
-app.route("/courses/<int:course_id>", methods=["GET"])
+@app.route("/courses/<int:course_id>", methods=["GET"])
 def get_course(course_id):
     course = find_course(course_id)
     if course:
