@@ -21,7 +21,7 @@ def add_event():
     if not data:
         return jsonify({"error": "No data provided"}), 400
 
-    missing = [f for f in ("title", "location", "date") if f not in data or not str(data[f]).strip()]
+    missing = [f for f in ("title", "location", "date", "time") if f not in data or not str(data[f]).strip()]
     if missing:
         return jsonify({"error": f"Missing required fields: {', '.join(missing)}"}), 400
 
@@ -30,6 +30,7 @@ def add_event():
         "title": data["title"].strip(),
         "location": data["location"].strip(),
         "date": data["date"].strip(),
+        "time": data["time"].strip(),
         "description": data.get("description", "").strip() or None,
         "link": data.get("link", "").strip() or None,
         "completed": False,
