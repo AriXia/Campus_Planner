@@ -1,55 +1,82 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from dotenv import load_dotenv
+import os
+from supabase import create_client
+
+
+# SUPABASE KEYS
+
+load_dotenv()
+
+url = os.getenv("SUPABASE_URL")
+key = os.getenv("SUPABASE_KEY")
+
+supabase = create_client(url, key)
+
+
+# FLASK APP 
 
 app = Flask(__name__)
+CORS(app)
 
-courses = []
-next_id = 1
 
-def find_course(course_id):
-    return next((course for course in courses if course["id"] == course_id), None)  
+# HOME ROUTE (test)
 
 @app.route("/")
 def home():
-    return "Backend is running!", 200
+    return "Backend running"
 
 
-@app.route("/courses", methods=["GET"])
-def get_courses():
-    return jsonify(courses), 200
 
-@app.route("/courses", methods=["POST"])
-def add_course():
-    global next_id
-    data = request.get_json()
+# GET ALL ASSIGNMENTS
 
-    if not data or "name" not in data or "description" not in data:
-        return jsonify({"error": "Invalid input"}), 400
+@app.route("/assignments", methods=["GET"])
+def get_assignments():
+    response = supabase.table("assignments").select("*").execute()
+    return jsonify(response.data), 200
 
-    new_course = {
-        "id": next_id,
-        "name": data["name"].strip(),
-        "code": data["code"].strip(),
-        "created_at": None,
+
+
+# ADD NEW ASSIGNMENT
+
+@app.route("/assignments", methods=["POST"])
+def add_assignment():
+    data = request.get_json() or {}
+
+    # validation
+    if not data.get("assignment_title") or not data.get("class_name"):
+        return jsonify({"error": "Missing assignment_title or class_name"}), 400
+
+    new_assignment = {
+        "assignment_title": data["assignment_title"].strip(),
+        "class_name": data["class_name"].strip(),
+        "due_date": data.get("due_date") 
     }
 
-    courses.append(new_course)
-    next_id += 1
-    return jsonify(new_course), 201
+    response = supabase.table("assignments").insert(new_assignment).execute()
 
-@app.route("/courses/<int:course_id>", methods=["GET"])
+    return jsonify(response.data), 201
+
+app.route("/courses/<int:course_id>", methods=["GET"])
 def get_course(course_id):
     course = find_course(course_id)
     if course:
         return jsonify(course), 200
     return jsonify({"error": "Course not found"}), 404
 
-@app.route("/courses/<int:course_id>", methods=["DELETE"])
-def delete_course(course_id):
-    course = find_course(course_id)
-    if course:
-        courses.remove(course)
-        return jsonify({"message": "Course deleted"}), 200
-    return jsonify({"error": "Course not found"}), 404
+@app.route("/assignments/<int:assignment_id>", methods=["DELETE"])
+def delete_assignment(assignment_id):
+    supabase.table("assignments") \
+        .delete() \
+        .eq("id", assignment_id) \
+        .execute()
+
+    return jsonify({"message": f"Assignment {assignment_id} deleted"}), 200
+
+
+
+# RUN APP
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
