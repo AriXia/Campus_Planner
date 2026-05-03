@@ -58,7 +58,7 @@ def add_assignment():
 
     return jsonify(response.data), 201
 
-app.route("/courses/<int:course_id>", methods=["GET"])
+@app.route("/courses/<int:course_id>", methods=["GET"])
 def get_course(course_id):
     course = find_course(course_id)
     if course:
