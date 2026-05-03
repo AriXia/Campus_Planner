@@ -58,11 +58,14 @@ def add_assignment():
 
     return jsonify(response.data), 201
 
+
 @app.route("/courses/<int:course_id>", methods=["GET"])
 def get_course(course_id):
-    course = find_course(course_id)
-    if course:
-        return jsonify(course), 200
+    response = supabase.table("courses").select("*").eq("id", course_id).execute()
+
+    if response.data:
+        return jsonify(response.data[0]), 200
+
     return jsonify({"error": "Course not found"}), 404
 
 @app.route("/assignments/<int:assignment_id>", methods=["DELETE"])
