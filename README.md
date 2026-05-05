@@ -144,9 +144,9 @@ Campus_Planner-main/
 
 ---
 
-## ⚠️ Notes
+## Notes
 
-- Data is stored in memory — it resets when the backend restarts
+- Data is stored in memory, it resets when the backend restarts
 
 - Both the backend and frontend must be running at the same time
 
