@@ -5,7 +5,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f5f7fb;
+  background: #f3f0ff;
   color: #1f2937;
 }
 
@@ -14,8 +14,8 @@ body {
 }
 
 .navbar {
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
+  background: #7c3aed;
+  border-bottom: none;
   padding: 18px 32px;
   display: flex;
   justify-content: space-between;
@@ -25,6 +25,7 @@ body {
 .navbar-brand {
   font-size: 20px;
   font-weight: 700;
+  color: white;
 }
 
 .navbar-links {
@@ -34,12 +35,12 @@ body {
 
 .nav-link {
   text-decoration: none;
-  color: #4b5563;
+  color: rgba(255, 255, 255, 0.75);
   font-weight: 600;
 }
 
 .active-link {
-  color: #111827;
+  color: white;
 }
 
 .page-container {
@@ -115,7 +116,7 @@ body {
 }
 
 .event-form button {
-  background: #111827;
+  background: #7c3aed;
   color: white;
   width: 100%;
 }
@@ -183,7 +184,7 @@ body {
 }
 
 .dashboard-nav-btn {
-  background: #111827;
+  background: #7c3aed;
   color: white;
   border: none;
   border-radius: 8px;

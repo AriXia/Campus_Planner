@@ -12,7 +12,7 @@ function EventsPage() {
       setLoading(true);
       setError("");
 
-      const response = await fetch("http://127.0.0.1:5000/events");
+      const response = await fetch("http://127.0.0.1:5001/events");
       if (!response.ok) {
         throw new Error("Failed to load events");
       }
@@ -35,7 +35,7 @@ function EventsPage() {
     try {
       setError("");
 
-      const response = await fetch("http://127.0.0.1:5000/events", {
+      const response = await fetch("http://127.0.0.1:5001/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function EventsPage() {
     try {
       setError("");
 
-      const response = await fetch(`http://127.0.0.1:5000/events/${id}`, {
+      const response = await fetch(`http://127.0.0.1:5001/events/${id}`, {
         method: "DELETE",
       });
 

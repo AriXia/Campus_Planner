@@ -11,7 +11,7 @@ function AssignmentsPage() {
     try {
       setLoading(true);
       setError("");
-      const response = await fetch("http://127.0.0.1:5000/assignments");
+      const response = await fetch("http://127.0.0.1:5001/assignments");
       if (!response.ok) throw new Error("Failed to load assignments");
       const data = await response.json();
       setAssignments(data);
@@ -30,7 +30,7 @@ function AssignmentsPage() {
   async function handleCreate(newAssignment) {
     try {
       setError("");
-      const response = await fetch("http://127.0.0.1:5000/assignments", {
+      const response = await fetch("http://127.0.0.1:5001/assignments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newAssignment),
@@ -46,7 +46,7 @@ function AssignmentsPage() {
   async function handleDelete(id) {
     try {
       setError("");
-      const response = await fetch(`http://127.0.0.1:5000/assignments/${id}`, {
+      const response = await fetch(`http://127.0.0.1:5001/assignments/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete assignment");
@@ -61,7 +61,7 @@ function AssignmentsPage() {
     try {
       setError("");
       const response = await fetch(
-        `http://127.0.0.1:5000/assignments/${id}/complete`,
+        `http://127.0.0.1:5001/assignments/${id}/complete`,
         { method: "POST" }
       );
       if (!response.ok) throw new Error("Failed to mark complete");

@@ -11,8 +11,8 @@ function DashboardPage() {
     async function loadAll() {
       try {
         const [eventsRes, assignmentsRes] = await Promise.all([
-          fetch("http://127.0.0.1:5000/events"),
-          fetch("http://127.0.0.1:5000/assignments"),
+          fetch("http://127.0.0.1:5001/events"),
+          fetch("http://127.0.0.1:5001/assignments"),
         ]);
         const eventsData = await eventsRes.json();
         const assignmentsData = await assignmentsRes.json();
