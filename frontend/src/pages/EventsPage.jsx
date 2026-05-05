@@ -77,7 +77,7 @@ function EventsPage() {
     <div className="page-container">
       <div className="page-header">
         <h1>Campus Events</h1>
-        <p>Manage campus events and keep students informed.</p>
+        <p>Manage campus events and stay informed.</p>
       </div>
 
       <div className="events-layout">

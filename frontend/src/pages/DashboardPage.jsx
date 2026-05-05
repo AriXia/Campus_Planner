@@ -58,7 +58,7 @@ function DashboardPage() {
               <div className="dashboard-item" key={a.id}>
                 <div>
                   <strong>{a.title}</strong>
-                  <p className="dashboard-sub">{a.course} — Due: {a.due_date}</p>
+                  <p className="dashboard-sub">{a.course} — Due: {new Date(a.due_date + 'T00:00:00').toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
                 </div>
                 <span className="badge badge-pending">Pending</span>
               </div>
