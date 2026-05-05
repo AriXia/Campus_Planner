@@ -55,6 +55,7 @@ Open a terminal and run:
 cd "C:\Users\abrah\Downloads\Campus_Planner-main\Campus_Planner-main"
 python run.py
 
+
 You should see: Running on http://127.0.0.1:5000
 
 ### Step 4 — Run the Frontend
@@ -63,6 +64,7 @@ Open a **second** terminal and run:
 
 cd "C:\Users\abrah\Downloads\Campus_Planner-main\Campus_Planner-main\frontend"
 npm run dev
+
 
 You should see: VITE ready on http://localhost:5173/
 
